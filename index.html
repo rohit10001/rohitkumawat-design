@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Pixelify+Sans:wght@500;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f5f4ee;--rule:#e1e0d6;--ink:#121212;--mute:#5d5d58;--yel:#f6c744;--pink:#ef4f9a;--blue:#2a4bd7;--green:#20a86b;--mint:#a9dfc3;--rose:#f4b8cf;--sand:#e8d9a8;--sky:#b7c8f2;--red:#e5484d;
+--px:'Pixelify Sans','Courier New',monospace;--hand:'Caveat','Comic Sans MS',cursive;--mono:'JetBrains Mono',monospace;--sans:'Inter',Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper) repeating-linear-gradient(to bottom,transparent 0 31px,var(--rule) 31px 32px);min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+ 
+/* top bar */
+header{position:sticky;top:0;z-index:20;background:#fffffa;border-bottom:1px solid var(--ink);display:flex;align-items:center;gap:8px;padding:0 14px;height:42px}
+.logo{width:14px;height:14px;border-radius:50%;background:var(--pink);border:1.5px solid var(--ink);margin-right:6px}
+.tabs{display:flex;height:100%}
+.tabs button{font:700 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;background:none;border:0;padding:0 16px;display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--ink)}
+.tabs button.on{background:var(--yel)}
+.right{margin-left:auto;display:flex;align-items:center;gap:6px}
+.dot{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--ink)}
+.cbtn{cursor:pointer;color:var(--ink);font:700 10.5px var(--mono);text-transform:uppercase;border:1.5px solid var(--ink);padding:5px 10px;margin-left:6px;background:#fff;display:flex;gap:6px;align-items:center}
+ 
+main{max-width:1000px;margin:0 auto;padding:56px 24px 90px}
+.page{display:none}.page.on{display:block}
+ 
+/* shared bits */
+.hand{font-family:var(--hand);font-size:22px;font-weight:500}
+.mono{font:700 11px var(--mono);letter-spacing:.05em;text-transform:uppercase}
+.big{font:700 clamp(54px,10vw,104px)/.95 var(--px);letter-spacing:-.01em}
+.tape{position:absolute;width:74px;height:22px;background:rgba(246,199,68,.6);top:-11px;left:50%;margin-left:-37px;transform:rotate(-4deg);clip-path:polygon(0 0,100% 0,97% 25%,100% 50%,97% 75%,100% 100%,0 100%,3% 75%,0 50%,3% 25%)}
+.tape.b{background:rgba(42,75,215,.35)}.tape.p{background:rgba(239,79,154,.4)}
+.tag{display:inline-block;font:500 20px var(--hand);padding:2px 14px;transform:rotate(var(--r,-3deg));clip-path:polygon(0 0,100% 0,98% 30%,100% 60%,98% 100%,0 100%,2% 60%,0 30%)}
+.pill{display:inline-flex;align-items:center;gap:8px;font:700 12.5px var(--sans);color:#fff;padding:6px 6px 6px 14px;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.pill i{width:26px;height:26px;background:#fff;display:grid;place-items:center;padding:3px;border:1.5px solid var(--ink)}
+.pill i svg,.pill i img{width:100%;height:100%;display:block;stroke:none}
+.btn{display:inline-flex;align-items:center;gap:8px;font:700 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;padding:11px 16px;background:var(--ink);color:#fff;border:2px solid var(--ink);cursor:pointer}
+.btn.alt{background:#fff;color:var(--ink)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--blue)}
+ 
+/* home */
+.home{text-align:center;min-height:max(460px,calc(100vh - 188px));display:flex;align-items:center;justify-content:center}
+.stage{position:relative;width:100%;max-width:920px;padding:56px 0 10px}
+.sel{position:relative;display:inline-block;padding:10px 26px 4px;border:1.5px solid var(--red);margin:10px 0 18px;
+background:linear-gradient(#fff,#fff) 0 0/8px 8px no-repeat,linear-gradient(#fff,#fff) 100% 0/8px 8px no-repeat,linear-gradient(#fff,#fff) 0 100%/8px 8px no-repeat,linear-gradient(#fff,#fff) 100% 100%/8px 8px no-repeat}
+.sel .big{font:700 clamp(64px,13vw,150px)/1.05 'Poppins',sans-serif;letter-spacing:-.03em;padding:6px 0}
+.stk{position:absolute}
+.s1{top:0;left:8%;font-size:24px}.s2{top:14px;right:8%;font-size:24px}
+.sel .s3{left:-90px;bottom:-14px;font-size:24px}.sel .s4{right:-110px;bottom:-14px;font-size:24px}
+.tag.red{background:var(--red);color:#fff}
+.sel .av{width:76px;height:76px}.sel .a1{left:-170px;top:6px;background:var(--rose);animation:float 4.2s ease-in-out infinite}.sel .a2{right:-178px;top:-14px;background:var(--sky);animation:float 5s ease-in-out -2s infinite}
+.av{position:absolute;width:44px;height:44px;border-radius:50%;border:3px solid var(--yel);background:var(--rose);overflow:hidden;box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.av img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(2deg)}}
+.tagline{font:600 clamp(15px,3.6vw,40px)/1.2 var(--sans);letter-spacing:-.03em;white-space:nowrap;margin:34px auto 34px;min-height:1.2em}
+.tagline .caret{display:inline-block;width:.08em;height:1em;background:var(--ink);margin-left:.08em;vertical-align:-.12em;animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.home .btn{font-size:12.5px;padding:14px 22px}
+ 
+/* polaroid */
+.pol{background:#fff;padding:10px 10px 30px;border:1px solid #d4d3c8;box-shadow:0 8px 20px rgba(0,0,0,.14);position:relative;transform:rotate(var(--r,-4deg));width:200px;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+.pol:hover{transform:rotate(-2deg) scale(1.08) translateY(-6px);box-shadow:0 18px 34px rgba(0,0,0,.25)}
+.pol:hover img{transform:scale(1.05)}
+.pol img{transition:transform .4s}
+.pol .ph{aspect-ratio:1/1.05;background:var(--sky);display:grid;place-items:center;font:700 80px var(--px);color:var(--blue);overflow:hidden}
+.pol img{width:100%;height:100%;object-fit:cover}
+.pol span{position:absolute;bottom:7px;left:0;right:0;text-align:center;font:500 17px var(--hand)}
+ 
+/* about */
+.about{display:grid;grid-template-columns:1fr 260px;gap:40px;align-items:start;margin-top:20px}
+.lab{display:inline-block;background:var(--yel);padding:3px 8px;margin-bottom:16px}
+.about p{font-family:var(--hand);font-weight:500}
+.about .hand{font-size:23px;line-height:1.25;margin-bottom:16px;max-width:560px;padding-left:14px;border-left:4px solid var(--yel)}
+.about p.s{font-size:19px;line-height:1.3;color:var(--mute);margin-bottom:10px;max-width:560px}
+.pills{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}
+.stats{display:flex;flex-wrap:wrap;gap:14px}
+.note{padding:14px 16px;min-width:150px;transform:rotate(var(--r,0deg));transition:transform .25s cubic-bezier(.34,1.56,.64,1);cursor:default;clip-path:polygon(0 3%,3% 0,97% 2%,100% 0,100% 97%,97% 100%,3% 98%,0 100%)}
+.note:hover{transform:rotate(0) translateY(-8px) scale(1.08)}
+.note b{display:block;font:700 22px var(--px)}
+.note span{font:500 10px var(--mono);text-transform:uppercase;letter-spacing:.04em}
+ 
+/* projects */
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin:36px 0 40px}
+.card{position:relative;padding:18px;border:1px solid var(--ink);transform:rotate(var(--r,0deg));transition:transform .2s}
+.card:hover{transform:rotate(0) translateY(-4px)}
+.card .shot{aspect-ratio:16/10;margin:12px 0 14px;display:flex;align-items:flex-end;padding:14px;font:700 34px/1 var(--px);border:2px solid var(--ink);position:relative;overflow:hidden}
+.card .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card h3{font:600 22px var(--sans);letter-spacing:-.02em}
+.card p{font-size:13px;color:var(--mute);margin:6px 0 12px}
+.card.dk{background:#161616;color:#fff}.card.dk p{color:#b9b9b4}.card.dk .btn.alt{background:none;color:#fff;border-color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chips span{font:700 10px var(--mono);text-transform:uppercase;background:var(--sand);color:var(--ink);padding:3px 8px}
+.links{display:flex;gap:8px;flex-wrap:wrap}
+.links .btn{padding:8px 12px;font-size:10.5px}
+.more{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:22px}
+@media(min-width:1000px){.more{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}.more .sticky{padding:18px 14px}.more .sticky h3{font-size:23px}.more .links .btn{padding:8px 10px}}
+.sticky{padding:20px 18px;transform:rotate(var(--r,0deg));clip-path:polygon(0 2%,2% 0,98% 1%,100% 0,100% 98%,98% 100%,2% 99%,0 100%);min-height:210px;display:flex;flex-direction:column;gap:8px}
+.sticky h3{font:700 26px var(--px)}
+.sticky p{font-size:13px;flex:1}
+.sticky .links .btn{background:var(--ink)}
+.sticky .links .btn.alt{background:rgba(255,255,255,.7);color:var(--ink)}
+.sticky:hover{transform:rotate(0)}
+ 
+dialog{border:0;background:none;margin:auto;overflow:visible}
+dialog::backdrop{background:rgba(18,18,18,.45)}
+.cn{position:relative;background:var(--sand);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:30px 28px 24px;width:min(380px,88vw);display:flex;flex-direction:column;gap:12px}
+.cn h2{font:700 34px var(--px)}
+.cn .row{display:flex;flex-direction:column;gap:2px;background:#fff;border:1.5px solid var(--ink);padding:10px 14px;font-weight:600;font-size:15px;word-break:break-all}
+.cn .row:hover{background:var(--yel)}
+.cn .btn{align-self:flex-start}
+.cn.wide{width:min(1180px,94vw);max-height:90vh;padding:26px 26px 20px}
+.cn.wide .gh{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.gbar{display:flex;justify-content:space-between;align-items:center;gap:12px 20px;flex-wrap:wrap}
+.filters,.flinks{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{font:600 12px var(--mono,monospace);text-transform:uppercase;letter-spacing:.04em;background:#fff;color:var(--ink);border:1.5px solid var(--ink);padding:7px 11px;cursor:pointer;text-decoration:none}
+.chip:hover,.chip.on{background:var(--yel)}
+.chip.on{box-shadow:2px 2px 0 var(--ink)}
+.gscroll{overflow-y:auto;overscroll-behavior:contain;padding:6px 8px 12px 2px;margin-right:-6px}
+.gal{columns:3 260px;column-gap:20px}
+.g{break-inside:avoid;margin:0 0 20px;background:#fff;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);cursor:zoom-in;transition:transform .15s}
+.g:hover{transform:translate(-2px,-2px) rotate(-.4deg);box-shadow:6px 6px 0 var(--ink)}
+.g.hide{display:none}
+.g img{display:block;width:100%;height:auto;border-bottom:2px solid var(--ink);background:#ddd}
+.g figcaption{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 11px;font-size:13px}
+.gt{font:700 10px var(--mono,monospace);text-transform:uppercase;letter-spacing:.05em;padding:3px 7px;border:1.5px solid var(--ink);white-space:nowrap}
+.gt.ux{background:var(--sky)}.gt.gd{background:var(--rose)}
+#lb{width:100vw;height:100vh;max-width:none;max-height:none;margin:0;background:transparent}
+#lb::backdrop{background:rgba(12,12,12,.88)}
+.lbx{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px}
+.lbx img{max-width:min(94vw,1500px);max-height:80vh;object-fit:contain;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);background:#111}
+.lbc{display:flex;gap:16px;align-items:center;justify-content:space-between;width:min(94vw,700px);color:#fff;font-weight:600}
+.lbn{display:flex;gap:8px}.lbn button{background:var(--sand);color:var(--ink);border:2px solid var(--ink);font:700 16px var(--mono,monospace);width:40px;height:36px;cursor:pointer}
+.lbn button:hover{background:var(--yel)}
+@media(max-width:600px){.gal{columns:2 140px;column-gap:12px}.g{margin-bottom:12px}.g figcaption{flex-direction:column;align-items:flex-start;font-size:12px}.cn.wide{padding:20px 14px 14px}}
+
+@media(max-width:820px){
+  .about,.feat{grid-template-columns:1fr}
+  .pol{margin:0 auto}.stk,.av{display:none}
+  .tabs button{padding:0 10px}.tabs button svg{display:none}
+  .cbtn,.dot:nth-child(n+3){display:none}
+}
+@media(prefers-reduced-motion:reduce){.card,.btn,.note,.pol,.pol img{transition:none}.av{animation:none!important}.tagline .caret{animation:none}}
+</style>
+</head>
+<body>
+ 
+<header>
+  <div class="logo"></div>
+  <div class="tabs">
+    <button class="on" data-go="home"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 7.5H22l-6 4.5 2.3 7.5L12 17l-6.3 4.5L8 14 2 9.500h7.500z"/></svg>Home</button>
+    <button data-go="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg>About</button>
+    <button data-go="projects"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Projects</button>
+  </div>
+  <div class="right">
+    <span class="dot" style="background:var(--yel)"></span><span class="dot" style="background:var(--pink)"></span><span class="dot" style="background:var(--blue)"></span><span class="dot" style="background:var(--green)"></span>
+    <button class="cbtn" data-contact><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16"/><path d="M22 7l-10 7L2 7"/></svg>Contact</button>
+  </div>
+</header>
+ 
+<main>
+<!-- HOME -->
+<section class="page on" id="home">
+  <div class="home"><div class="stage">
+    <span class="tag stk s1" style="background:var(--mint);--r:-4deg">make things</span>
+    <span class="tag stk s2" style="background:var(--mint);--r:3deg">love the details</span>
+    <div class="hand">my name is</div>
+    <div class="sel"><h1 class="big">ROHIT</h1>
+      <span class="tag stk s3" style="background:var(--yel);--r:-3deg">UI/UX Designer</span>
+      <span class="tag stk s4 red" style="--r:3deg">Graphic Designer</span>
+      <div class="av a1"><img src="r.jpg" alt="R"></div><div class="av a2"><img src="k.jpg" alt="K"></div>
+    </div>
+    <p class="tagline" aria-label="I design things that feel good to use"><span id="type"></span><span class="caret" aria-hidden="true"></span></p>
+    <button class="btn" data-contact>Contact me</button>
+    <div style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn alt" type="button" id="viewDesigns">View Designs</button>
+      <a class="btn alt" href="https://www.linkedin.com/in/rohitkumawat1404" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div></div>
+</section>
+ 
+<!-- ABOUT -->
+<section class="page" id="about">
+  <div class="hand">about me</div>
+  <h1 class="big" style="margin:6px 0 30px">ABOUT</h1>
+  <div class="about">
+    <div>
+      <span class="lab mono">Main bio</span>
+      <p class="hand">Hi, I’m a third-year B.Tech undergraduate at Pillai University, passionate about Graphic Design and UI/UX Design.</p>
+      <p class="s">Currently serving as the Design Lead at Google Developer Groups (GDG), I lead a creative team and contribute to designing event posters, promotional creatives, merchandise, and other visual assets.</p>
+      <p class="s">I enjoy transforming ideas into visually engaging, intuitive, and user-focused designs, with a strong emphasis on attention to detail, visual consistency, and aesthetics. I work with tools like Figma, constantly exploring new design approaches and refining my creative skills.</p>
+      <p class="s">I believe great design goes beyond appearance — it’s about thoughtful details, meaningful experiences, and effective communication.</p>
+      <div class="pills">
+        <span class="pill" style="background:#a259ff">Figma<i class="lg"><img src="figma.png" alt=""></i></span>
+        <span class="pill" style="background:#0b6fc2">Photoshop<i class="lg"><svg viewBox="0 0 24 24"><rect x="1" y="1" width="22" height="22" rx="4" fill="#001e36" stroke="none"/><text x="12" y="16.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="11" fill="#31a8ff" stroke="none">Ps</text></svg></i></span>
+        <span class="pill" style="background:#7a3df0">Premiere Pro<i class="lg"><svg viewBox="0 0 24 24"><rect x="1" y="1" width="22" height="22" rx="4" fill="#00005b" stroke="none"/><text x="12" y="16.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="11" fill="#9999ff" stroke="none">Pr</text></svg></i></span>
+        <span class="pill" style="background:#5b2bd1">After Effects<i class="lg"><svg viewBox="0 0 24 24"><rect x="1" y="1" width="22" height="22" rx="4" fill="#00005b" stroke="none"/><text x="12" y="16.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="11" fill="#9999ff" stroke="none">Ae</text></svg></i></span>
+        <span class="pill" style="background:#e07b00">Illustrator<i class="lg"><svg viewBox="0 0 24 24"><rect x="1" y="1" width="22" height="22" rx="4" fill="#330000" stroke="none"/><text x="12" y="16.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="11" fill="#ff9a00" stroke="none">Ai</text></svg></i></span>
+      </div>
+      <div class="stats">
+        <div class="note" style="background:var(--sky);--r:-2deg"><b>Graphic Lead</b><span>GDG PCE</span></div>
+        <div class="note" style="background:var(--sand);--r:2deg"><b>Event Winner</b><span>UI/UX</span></div>
+        <div class="note" style="background:var(--rose);--r:-1deg"><b>Designer</b><span>UI/UX &amp; Graphic</span></div>
+      </div>
+    </div>
+    <div class="pol" style="--r:3deg"><i class="tape"></i><div class="ph"><img src="r.jpg" alt="Rohit Kumawat"></div><span>me, building stuff</span></div>
+  </div>
+</section>
+ 
+<!-- PROJECTS -->
+<section class="page" id="projects">
+  <div class="hand">explore my work</div>
+  <h1 class="big" style="margin:6px 0 0">FEATURED WORKS</h1>
+  <div class="feat">
+    <article class="card" style="background:var(--sand);--r:-1.5deg"><i class="tape"></i>
+      <span class="mono">● Design · Figma</span>
+      <div class="shot" id="figmaShot" style="background:#1e1e1e;justify-content:center;align-items:center;padding:0;cursor:pointer"><img src="figma.png" alt="Figma logo" style="object-fit:contain;padding:6px"></div>
+      <h3>Figma</h3>
+      <p>UI/UX and graphic design work: app screens, web concepts, posters and brand pieces.</p>
+      <div class="links"><button class="btn" id="figmaOpen" type="button">View my work</button></div>
+    </article>
+    <article class="card dk" style="--r:1.5deg"><i class="tape b"></i>
+      <span class="mono">● Live · HTML + CSS</span>
+      <div class="shot" style="background:var(--green);color:var(--ink);justify-content:center;align-items:center;padding:0"><img src="heisenberg.png" alt="Heisenbros pixel art" style="object-fit:contain;padding:12px"></div>
+      <h3>Heisenbros</h3>
+      <p>A Breaking Bad themed website with a bold visual identity.</p>
+      <div class="links"><a class="btn" style="background:var(--yel);color:var(--ink);border-color:var(--yel)" href="https://heisenbros-1.vercel.app/" target="_blank" rel="noopener">Live demo</a><a class="btn alt" href="https://github.com/rohitkumawat-dev/heisenbros" target="_blank" rel="noopener">GitHub</a></div>
+    </article>
+  </div>
+</section>
+</main>
+ 
+<dialog id="figma"><div class="cn wide"><i class="tape"></i>
+  <div class="gh">
+    <div><span class="hand">my figma folder</span></div>
+    <button class="btn" id="figmaClose" type="button">Close</button>
+  </div>
+  <div class="gbar">
+    <div class="filters" role="tablist" aria-label="Filter gallery">
+      <button type="button" class="chip on" data-f="all">All</button>
+      <button type="button" class="chip" data-f="ux">UI/UX</button>
+      <button type="button" class="chip" data-f="gd">Graphic</button>
+    </div>
+    <div class="flinks">
+      <span class="mono">Open in Figma</span>
+      <a class="chip" href="https://www.figma.com/design/1I2SMxivX8ncdLlreWxbQi/HawkinsMart.?t=1sM3qI1D5R9CJkUM-1" target="_blank" rel="noopener">Stranger Things ↗</a>
+      <a class="chip" href="https://www.figma.com/design/DPzpRl8gysCCg6xODEg6t0/juicewrld?node-id=0-1&amp;t=1sM3qI1D5R9CJkUM-1" target="_blank" rel="noopener">Juicewrld ↗</a>
+      <a class="chip" href="https://www.figma.com/design/JoekDmZWq9uAWZ02fPAdXF/Travel-App-UI?t=1sM3qI1D5R9CJkUM-1" target="_blank" rel="noopener">Travel &amp; Enjoy ↗</a>
+    </div>
+  </div>
+  <div class="gscroll"><div class="gal">
+    <figure class="g" data-cat="ux" data-full="gallery/hawkinsmart-f.jpg" data-title="HawkinsMart · Stranger Things store"><img src="gallery/hawkinsmart-t.jpg" alt="HawkinsMart · Stranger Things store" width="580" height="900" loading="lazy"><figcaption><b>HawkinsMart · Stranger Things store</b><span class="gt ux">UI/UX</span></figcaption></figure>
+    <figure class="g" data-cat="gd" data-full="gallery/jaipur-f.jpg" data-title="Jaipur · The Pink City"><img src="gallery/jaipur-t.jpg" alt="Jaipur · The Pink City" width="509" height="900" loading="lazy"><figcaption><b>Jaipur · The Pink City</b><span class="gt gd">Graphic</span></figcaption></figure>
+    <figure class="g" data-cat="ux" data-full="gallery/prime-f.jpg" data-title="Prime · landing page concept"><img src="gallery/prime-t.jpg" alt="Prime · landing page concept" width="900" height="590" loading="lazy"><figcaption><b>Prime · landing page concept</b><span class="gt ux">UI/UX</span></figcaption></figure>
+    <figure class="g" data-cat="gd" data-full="gallery/gdg-banner-f.jpg" data-title="GDG PCE · Code. Coffee. Repeat."><img src="gallery/gdg-banner-t.jpg" alt="GDG PCE · Code. Coffee. Repeat." width="900" height="366" loading="lazy"><figcaption><b>GDG PCE · Code. Coffee. Repeat.</b><span class="gt gd">Graphic</span></figcaption></figure>
+    <figure class="g" data-cat="gd" data-full="gallery/above-the-noise-f.jpg" data-title="Above the noise"><img src="gallery/above-the-noise-t.jpg" alt="Above the noise" width="637" height="900" loading="lazy"><figcaption><b>Above the noise</b><span class="gt gd">Graphic</span></figcaption></figure>
+    <figure class="g" data-cat="ux" data-full="gallery/travel-app-f.jpg" data-title="Travel &amp; Enjoy app UI"><img src="gallery/travel-app-t.jpg" alt="Travel &amp; Enjoy app UI" width="900" height="579" loading="lazy"><figcaption><b>Travel &amp; Enjoy app UI</b><span class="gt ux">UI/UX</span></figcaption></figure>
+    <figure class="g" data-cat="gd" data-full="gallery/dussehra-f.jpg" data-title="GDG PCE · Happy Dussehra"><img src="gallery/dussehra-t.jpg" alt="GDG PCE · Happy Dussehra" width="506" height="900" loading="lazy"><figcaption><b>GDG PCE · Happy Dussehra</b><span class="gt gd">Graphic</span></figcaption></figure>
+    <figure class="g" data-cat="gd" data-full="gallery/gdg-tee-f.jpg" data-title="GDG PCE · member tee"><img src="gallery/gdg-tee-t.jpg" alt="GDG PCE · member tee" width="900" height="810" loading="lazy"><figcaption><b>GDG PCE · member tee</b><span class="gt gd">Graphic</span></figcaption></figure>
+    <figure class="g" data-cat="gd" data-full="gallery/farewell-f.jpg" data-title="GDG PCE · Farewell 2024-25"><img src="gallery/farewell-t.jpg" alt="GDG PCE · Farewell 2024-25" width="636" height="900" loading="lazy"><figcaption><b>GDG PCE · Farewell 2024-25</b><span class="gt gd">Graphic</span></figcaption></figure>
+    <figure class="g" data-cat="gd" data-full="gallery/lohri-f.jpg" data-title="GDG PCE · Happy Lohri"><img src="gallery/lohri-t.jpg" alt="GDG PCE · Happy Lohri" width="506" height="900" loading="lazy"><figcaption><b>GDG PCE · Happy Lohri</b><span class="gt gd">Graphic</span></figcaption></figure>
+    <figure class="g" data-cat="gd" data-full="gallery/iron-man-f.jpg" data-title="GDG PCE · Iron Man Bootcamp"><img src="gallery/iron-man-t.jpg" alt="GDG PCE · Iron Man Bootcamp" width="640" height="828" loading="lazy"><figcaption><b>GDG PCE · Iron Man Bootcamp</b><span class="gt gd">Graphic</span></figcaption></figure>
+    <figure class="g" data-cat="gd" data-full="gallery/navratri-f.jpg" data-title="GDG PCE · Shubh Navratri"><img src="gallery/navratri-t.jpg" alt="GDG PCE · Shubh Navratri" width="506" height="900" loading="lazy"><figcaption><b>GDG PCE · Shubh Navratri</b><span class="gt gd">Graphic</span></figcaption></figure>
+  </div></div>
+</div></dialog>
+<dialog id="lb"><div class="lbx"><img id="lbImg" alt=""><div class="lbc"><span id="lbCap"></span><span class="lbn"><button type="button" id="lbPrev" aria-label="Previous">←</button><button type="button" id="lbNext" aria-label="Next">→</button><button type="button" id="lbClose" aria-label="Close">✕</button></span></div></div></dialog>
+<dialog id="contact"><div class="cn"><i class="tape"></i>
+  <span class="hand">say hi</span>
+  <h2>Contact me</h2>
+  <a class="row" href="mailto:rohit24extc@student.mes.ac.in"><span class="mono">Email</span>rohit24extc@student.mes.ac.in</a>
+  <a class="row" href="tel:+918104554029"><span class="mono">Mobile</span>8104554029</a>
+  <button class="btn" id="close">Close</button>
+</div></dialog>
+<script>
+const btns=document.querySelectorAll('.tabs button'),pages=document.querySelectorAll('.page');
+function go(id){
+  if(!document.getElementById(id))id='home';
+  pages.forEach(p=>p.classList.toggle('on',p.id===id));
+  btns.forEach(b=>b.classList.toggle('on',b.dataset.go===id));
+  scrollTo(0,0);
+}
+btns.forEach(b=>b.addEventListener('click',()=>{location.hash=b.dataset.go}));
+addEventListener('hashchange',()=>go(location.hash.slice(1)));
+go(location.hash.slice(1)||'home');
+const lines=['I design things that feel good to use','Turning ideas into clean, thoughtful interfaces','Posters, brands and screens, detail obsessed','Making ideas look as good as they work'];
+const tEl=document.getElementById('type');
+if(matchMedia('(prefers-reduced-motion:reduce)').matches){tEl.textContent=lines[0]}
+else{let li=0,ci=0,del=false;
+(function tick(){
+  const t=lines[li];
+  ci+=del?-1:1;tEl.textContent=t.slice(0,ci);
+  let wait=del?28:55;
+  if(!del&&ci===t.length){del=true;wait=1800}
+  else if(del&&ci===0){del=false;li=(li+1)%lines.length;wait=350}
+  setTimeout(tick,wait);
+})();}
+const d=document.getElementById('contact');
+document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click',()=>d.showModal()));
+document.getElementById('close').addEventListener('click',()=>d.close());
+d.addEventListener('click',e=>{if(e.target===d)d.close()});
+const fg=document.getElementById('figma');
+document.getElementById('figmaOpen').addEventListener('click',()=>fg.showModal());
+document.getElementById('viewDesigns').addEventListener('click',()=>fg.showModal());
+document.getElementById('figmaShot').addEventListener('click',()=>fg.showModal());
+const gs=[...document.querySelectorAll('.g')],lb=document.getElementById('lb');
+let cur=0;
+const vis=()=>gs.filter(x=>!x.classList.contains('hide'));
+function show(i){const v=vis();cur=(i+v.length)%v.length;const f=v[cur];
+  document.getElementById('lbImg').src=f.dataset.full;document.getElementById('lbImg').alt=f.dataset.title;
+  document.getElementById('lbCap').innerHTML=f.dataset.title+' <small style="opacity:.6">'+(cur+1)+' / '+v.length+'</small>';}
+gs.forEach(f=>f.addEventListener('click',()=>{show(vis().indexOf(f));lb.showModal()}));
+document.getElementById('lbPrev').onclick=()=>show(cur-1);
+document.getElementById('lbNext').onclick=()=>show(cur+1);
+document.getElementById('lbClose').onclick=()=>lb.close();
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lbx'))lb.close()});
+lb.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
+document.querySelectorAll('.chip[data-f]').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('.chip[data-f]').forEach(x=>x.classList.toggle('on',x===c));
+  gs.forEach(g=>g.classList.toggle('hide',c.dataset.f!=='all'&&g.dataset.cat!==c.dataset.f));
+}));
+document.getElementById('figmaClose').addEventListener('click',()=>fg.close());
+fg.addEventListener('click',e=>{if(e.target===fg)fg.close()});
+
+</script>
+</body>
+</html>
